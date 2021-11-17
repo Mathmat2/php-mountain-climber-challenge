@@ -25,11 +25,21 @@ class RotationString
             return false;
         }
         
-        $len = strlen($s1) - $pos ;
+        $len = strlen($s1);
 
-        $str1 = substr($s1, 0, 1);
+        for ($i = 0; $i < $len; ++$i) {
+            if ($pos >= $len) {
+                $pos = 0;
+            }
 
-        // TO CONTINUE
+            if ($s1[$i] != $s2[$pos]) {
+                return false;
+            }
+
+            $pos++;
+        }
+
+        
 
         return true;
 
