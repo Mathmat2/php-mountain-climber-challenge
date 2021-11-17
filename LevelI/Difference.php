@@ -8,7 +8,7 @@ namespace Hackathon\LevelI;
 class Difference
 {
     private $a;     // Chaine A
-    private $b;     // Chaine A
+    private $b;     // Chaine A  -> Mae : Chaine B plutot non ?
     public $cost;   // Coût de changement
 
     /**
@@ -34,13 +34,31 @@ class Difference
         $lenA = strlen($this->a);
         $lenB = strlen($this->b);
 
-        for ($i = 1; $i <= $lenA; ++$i) {
-            for ($j = 1; $j <= $lenB; ++$j) {
-                $c = ($this->a[$i - 1] === $this->b[$j - 1]) ? 0 : 1;
-                $matrix[$i][$j] = 0;
+        $diff = 0;
+        $j = 0;
+
+        for ($i = 0; $i < $lenA; ++$i) {
+            if ($this->a[$i] !== $this->b[$j]){
+                $diff = $diff++;
+                $j = $j + 1;
+            }
+            if ($this->a[$i] === $this->b[$j]){
+                $j = $j + 1;
+            }
+            if ($j >= $lenB){
+                break;
             }
         }
 
-        return $matrix[$lenA][$lenB];
+        return $diff;
+
+        // for ($i = 1; $i <= $lenA; ++$i) {
+        //     for ($j = 1; $j <= $lenB; ++$j) {
+        //         $c = ($this->a[$i - 1] === $this->b[$j - 1]) ? 0 : 1;
+        //         $matrix[$i][$j] = 0;
+        //     }
+        // }
+
+        // return $matrix[$lenA][$lenB];
     }
 }
