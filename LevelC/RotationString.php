@@ -14,18 +14,26 @@ class RotationString
      */
     public static function isRotation($s1, $s2)
     {
-        $findme = substr($s1, 0, 1);
-        
-        for ($i = 0; $i < strlen($s2); $i++) {
+        if (strlen($s1) != strlen($s2)){
+            return false;
+        }
 
-            if ( $findme == substr($s2, $i, 1)){
-                $pos = strpos($s2, $findme);
-                break;
-            }
+        $findme = substr($s1, 0, 1);
+        $pos = strpos($s2, $findme);
+
+        if ($pos == false){
+            return false;
         }
         
+        $len = strlen($s1) - $pos ;
 
-        return false;
+        $str1 = substr($s1, 0, 1);
+
+        // TO CONTINUE
+
+        return true;
+
+
     }
 
     public static function isSubString($s1, $s2)
