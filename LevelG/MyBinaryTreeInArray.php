@@ -69,6 +69,24 @@ class MyBinaryTreeInArray
     public function course($index, $value)
     {
         /** @TODO */
+        if ($this->isEmpty()) {
+            return $index;
+        }
+        if (!$this->nodeExist($index)) {
+            return $index;
+        }
+        if ($index == 0) {
+            return $index;
+        }
+        if ($this->tree[$index] == $value) {
+            return $index;
+        }
+        if ($this->tree[$index] < $value) {
+            return $this->course($this->getLeftIndex($index), $value);
+        }
+        if ($this->tree[$index] > $value) {
+            return $this->course($this->getRightIndex($index), $value);
+        }
     }
 
     /**

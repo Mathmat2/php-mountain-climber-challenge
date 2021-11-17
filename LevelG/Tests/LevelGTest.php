@@ -16,6 +16,7 @@ class LevelGTest extends \PHPUnit\Framework\TestCase
     {
         $tree = new MyBinaryTreeInArray();
         $tree->add(3)->add(5)->add(7)->add(2)->add(10)->add(9)->add(6);
+        print_r($tree);
         $this->assertEquals(15, $tree->hasValue(10));
         $this->assertEquals(1, $tree->hasValue(3));
         $this->assertEquals(7, $tree->hasValue(7));
