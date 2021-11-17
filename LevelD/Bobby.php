@@ -25,6 +25,30 @@ class Bobby
         if ($price > $this->total) {
             return false;
         }
+        
+        $len = count($this->wallet);
+        while ($price > 0) {
+            // Get max
+            $max = 0;
+            $pos = -1;
+            for ($i=0; $i < count($this->wallet); $i++) {
+               if (is_numeric($this->wallet[$i])) {
+                   if ($this->wallet[$i] <= $price && $this->wallet[$i] > $max) {
+                       $pos = $i;
+                       $max = $this->wallet[$i];
+                   }
+               }
+            }
+            if ($pos == -1) {
+                return true;
+            }
+            $price = $price - $this->wallet[$pos];
+            $this->total = $this->total - $this->wallet[$pos];
+            //print_r($this->wallet);
+            //print_r($pos);
+            unset($this->wallet[$pos]);
+            $len = $len - 1;
+        }
 
         return true;
     }
