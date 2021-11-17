@@ -24,15 +24,6 @@ class MaxiInteger
             return $this;
         }
 
-        /**
-         * You can delete this part of the code
-         */
-        $maxLength = max(strlen($this->getValue()), strlen($other->getValue()));
-        if ($maxLength) {
-            $other = $other->fillWithZero($maxLength);
-            $this->setValue($this->fillWithZero($maxLength)->getValue());
-        }
-
         return $this->realSum($this, $other);
     }
 
@@ -45,7 +36,56 @@ class MaxiInteger
      */
     private function realSum($a, $b)
     {
-        /** @TODO */
+        $reverse_a = strrev($a->getValue());
+        $reverse_b = strrev($b->getValue());
+
+        $retenue = 0;
+
+        $result = "";
+        $i = 0;
+
+        while ($i < strlen($reverse_a) && $i < strlen($reverse_b)) {
+            $val_a = intval($reverse_a[$i]);
+            $val_b = intval($reverse_b[$i]);
+
+            $add = $val_a + $val_b + $retenue;
+            $retenue = intdiv($add, 10);
+            $result .= strval($add % 10);
+
+            ++$i;
+        }
+
+        if (strlen($reverse_b) > strlen($reverse_a)) {
+            for ($j = $i; $j < strlen($reverse_b); ++$j) {
+                $val_b = intval($reverse_b[$j]);
+                if ($retenue != 0) {
+                    $add = $val_b + $retenue;
+                    $retenue = intdiv($add, 10);
+                    $val_b = $add % 10;
+                }
+
+                $result .= $val_b;
+            }
+        }
+
+        if (strlen($reverse_b) < strlen($reverse_a)) {
+            for ($j = $i; $j < strlen($reverse_a); ++$j) {
+                $val_a = intval($reverse_a[$j]);
+                if ($retenue != 0) {
+                    $add = $val_a + $retenue;
+                    $retenue = intdiv($add, 10);
+                    $val_a = $add % 10;
+                }
+
+                $result .= $val_a;
+            }
+        }
+
+        if ($retenue != 0) {
+            $result .= $retenue;
+        }
+
+        return new MaxiInteger(strrev($result));
     }
 
     private function setValue($value)
