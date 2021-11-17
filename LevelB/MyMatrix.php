@@ -84,6 +84,22 @@ class MyMatrix
     public function fillZero()
     {
         /** @TODO */
+        for ($i = 0; $i < $this->iMax; ++$i) {
+            for ($j = 0; $j < $this->jMax; ++$j) {
+                // Test if the tab can be entirely filled -> fail :(
+                $this->matrix[$i][$j] = 0;
+                if (!is_null($this->matrix[$i][$j])) {
+                    // Column
+                    for ($k = 0; $k < $this->iMax; ++$k) {
+                        $this->matrix[$k][$j] = 0;
+                    }
+                    // Line
+                    for ($k = 0; $k < $this->jMax; ++$k) {
+                        $this->matrix[$i][$k] = 0;
+                    }
+                }
+            }
+        }
 
         return $this;
     }
