@@ -14,9 +14,26 @@ class RotationString
      */
     public static function isRotation($s1, $s2)
     {
-        /** @TODO */
+        if (strlen($s1) != strlen($s2)){
+            return false;
+        }
 
-        return false;
+        $findme = substr($s1, 0, 1);
+        $pos = strpos($s2, $findme);
+
+        if ($pos == false){
+            return false;
+        }
+        
+        $len = strlen($s1) - $pos ;
+
+        $str1 = substr($s1, 0, 1);
+
+        // TO CONTINUE
+
+        return true;
+
+
     }
 
     public static function isSubString($s1, $s2)
