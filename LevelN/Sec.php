@@ -24,7 +24,8 @@ class Sec
     public function hackSaltGenerator()
     {
         // @TODO
-        return "aaa";
+        $time = date('l');
+        return strrev($time);
     }
 
     /**
